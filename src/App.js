@@ -12,9 +12,14 @@ function App() {
   }, [tasks])
 
   useEffect(() => {
-    const tasks = JSON.parse(localStorage.getItem('tasks'));
-    setTasks(tasks);
-  }, [])
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    if (storedTasks) {
+        setTasks(storedTasks);
+    } else {
+        setTasks([]);
+    }
+}, []);
+
 
   function addTask(name) {
     setTasks(prev => {
